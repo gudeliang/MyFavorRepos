@@ -8,4 +8,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.aspnetcore.staticfiles" Version="2.2.0" />
+  </ItemGroup>
+
 </Project>

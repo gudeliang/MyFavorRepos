@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -16,6 +17,10 @@ namespace MyFavorRepos.Web
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            //ÅäÖÃMvc + json ÐòÁÐ»¯
+            services.AddMvc(options => { options.EnableEndpointRouting = false; })
+                    .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -25,15 +30,21 @@ namespace MyFavorRepos.Web
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
+            else
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            //¿ªÆôindex.html
+            app.UseFileServer();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
