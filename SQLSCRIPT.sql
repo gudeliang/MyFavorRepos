@@ -1,4 +1,3 @@
---创建数据库
 create database MyFavorRepos
 
 Create table tbl_Left
