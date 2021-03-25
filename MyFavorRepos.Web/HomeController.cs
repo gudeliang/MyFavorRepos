@@ -7,7 +7,8 @@ namespace MyFavorRepos.Web
         // GET: /<controller>/
         public IActionResult Index()
         {
-            return Redirect("/MyFavorRepos.html");
+            ///Views/Home/
+            return View("/MyFavorRepos.html");
         }
     }
 }

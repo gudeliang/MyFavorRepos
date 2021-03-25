@@ -11,4 +11,8 @@
     <PackageReference Include="Microsoft.aspnetcore.staticfiles" Version="2.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\MyFavorRepos.html" />
+  </ItemGroup>
+
 </Project>
