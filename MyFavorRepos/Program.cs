@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using System.Net.Http;
+using HtmlAgilityPack;
+
 
 namespace MyFavorRepos
 {
@@ -13,7 +10,19 @@ namespace MyFavorRepos
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            // CreateHostBuilder(args).Build().Run();
+
+            var httpClientHandler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (s, c, ch, ssl) => true
+            };
+            HttpClient httpClient = new HttpClient(httpClientHandler);
+            var domStr = httpClient.GetStringAsync("http://github.com/idcf-boat-house").Result.ToString();
+
+            var html = new HtmlDocument();
+            html.LoadHtml(domStr);
+            //寻找XPATH.....正在进行中
+            var liNodes = html.DocumentNode.SelectNodes("//div[@class='flex-auto ']/");
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

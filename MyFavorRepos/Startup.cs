@@ -46,6 +46,8 @@ namespace MyFavorRepos
             {
                 endpoints.MapControllers();
             });
+
+
         }
     }
 }
